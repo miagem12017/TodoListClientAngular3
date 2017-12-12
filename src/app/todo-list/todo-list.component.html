@@ -1,0 +1,123 @@
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+
+
+<body class="bd">
+
+<div class="">
+  <div class="ent">
+    <h1 class="currentTodoListTitle">{{list.name}}</h1>
+  </div>
+  <div class="">
+  </div>
+
+  <!-- *****************************A supprimer***************************************************************** -->
+  <div [attr.id]="'addItemToCurrLi' + list.id"  class="w3-modal">
+    <div class="w3-modal-content">
+      <div class="modaleHead">
+        <h1 class="modaleHeadTitle">Ajouter un Todo</h1>
+        <span (click)="hideAddModale()" class="w3-button w3-display-topright">&times;</span>
+      </div>
+      <div class="modal-container">
+        <form class="form-horizontal">
+          <div class="input-group">
+          <span class="input-group-addon">Tite</span>
+          <input type="text" #newItemLabel class="form-control" name="itemTitle" placeholder="Tappez le titre de la tâche">
+          </div>
+          <br>
+          <div class="input-group">
+            <span class="input-group-addon">Date</span>
+            <input type="date" #newDate class="form-control" name="itemDate" placeholder="Tappez la date ici">
+          </div>
+          <br>
+          <div class="input-group">
+            <span class="input-group-addon">Description</span>
+            <input type="text" #newDescription class="form-control" name="itemDescription" placeholder="Tapez une description...">
+          </div>
+          <br>
+          &lt;!&ndash;
+          <div class="input-group">
+            <span class="input-group-addon">Salle</span>
+            <input type="text" #newSalle class="form-control" name="itemSalleLibelle" placeholder="Libellé de la salle">
+            <input type="number" #newSalleCapacite class="form-control" name="itemSalleCapacite" placeholder="Capacité">
+            <input type="text" #newSalleHeureFerm class="form-control" name="itemSalleHeure" placeholder="Heure de fermeture">
+            <input type="text" #newSalleContact class="form-control" name="itemContact" placeholder="Nom du Contact">
+            <input type="text" #newSalleTel class="form-control" name="itemSalleTel" placeholder="Téléphone de la salle">
+            <input type="email" #newSalleEmail class="form-control" name="itemEmail" placeholder="E-mail">
+          </div>
+          <br>
+          &lt;!&ndash;
+          <button type="button" (click)="createItem(newItemLabel.value, newDate.value, newDescription.value,
+              newSalle.value ,newSalleCapacite.value, newSalleHeureFerm.value, newSalleContact.value,
+              newSalleTel.value, newSalleEmail.value);
+              newItemLabel.value=''; newDate.value=''; newDescription.value;
+              newSalle.value =''; newSalleCapacite.value= ''; newSalleHeureFerm.value= ''; newSalleContact.value= '';
+              newSalleTel.value= ''; newSalleEmail.value= ''" class="btn btn-success btn-block">Ajouter
+          </button>
+          <button type="button" (click)="showAddModale()" class="btn btn-danger btn-block">Annuler</button>
+          &ndash;&gt;
+        </form>
+      </div>
+    </div>
+  </div>
+<!-- *********************************************************************************************************** -->
+
+</div>
+
+<!-- Modal Structure -->
+<div id="modal1" style="height: 300px" class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
+  <!-- Formulaire d'ajout item -->
+  <div class="itemEditModal">
+    <h4>Ajouter une nouvelle tâche</h4>
+  </div>
+  <form class="col s12">
+    <div class="addModalContent">
+      <div class="row">
+        <div class="input-field col s6">
+          <input type="text" #newItemLabel class="form-control" name="itemTitle">
+          <label>Titre</label>
+        </div>
+        <!-- Date-->
+        <div class="input-field col s6">
+          <input type="date" #newDate class="form-control" name="itemDate">
+        </div>
+      </div>
+      <div class="input-field col s6">
+        <input type="text" #newDescription class="form-control" name="itemDescription">
+        <label>Description</label>
+      </div>
+  </div>
+    <div class="modal-footer">
+      <a class="waves-effect waves-light btn" (click)="createItem(newItemLabel.value, newDate.value, newDescription.value);
+                newItemLabel.value=''; newDate.value=''; newDescription.value;">Enregistrer</a>
+      <a class="waves-effect waves-green btn-flat" (click)="closeModal()" style="color: darkred">Annuler</a>
+    </div>
+  </form>
+</div>
+<!-- Contenu de todolist -->
+<section class="col-lg-12">
+  <div class="addBtnContener">
+    <button (click)="openModal()" class="btn btn-default">Ajouter +</button>
+    <button (click)="delete()" class="btn btn-primary glyphicon glyphicon-trash ed" style="float: right"></button>
+    <form (ngSubmit)="editListName(newListName.value); newListName.value=''">
+      <input type="text" #newListName class="form-control" name="itemList" placeholder="Modifier le nom de la liste" style="margin-bottom: 10px; color: white;">
+    </form>
+  </div>
+  <div class="todoListContent">
+    <div class="checkbox" >
+      <app-todo-item *ngFor="let item of list.items"
+                     [clock]="item.clock"
+                     [item]="item"
+                     [listId]="list.id">
+      </app-todo-item>
+    </div>
+  </div>
+  <div class="todoListFooter">
+      TP IHM TodoList 2017
+  </div>
+  </section>
+</body>

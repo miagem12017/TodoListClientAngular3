@@ -1,0 +1,95 @@
+body {
+  padding-top: 10px;
+  background-image: url('image/bk2.jpg');
+
+}
+.titre {
+  background-color: silver;
+  /*border: 2px solid black;*/
+  border-radius: 6px 6px 0px 0px;
+  height: 100px;
+  text-align: center;
+
+}
+
+footer{
+  background-color: silver;
+  /*border: 2px solid black;*/
+  border-radius: 0px 0px 6px 6px;
+  height: 50px;
+  text-align: center;
+}
+
+section{
+  background-color: lightgray;
+  height: 500px;
+}
+
+.cl{
+  border-radius: 6px;
+}
+
+a{
+  text-decoration: none;
+
+}
+
+.sec{
+  margin-bottom: 30px;
+
+  border: 1px solid;
+  line-height: 40px;
+  padding: 10px;
+  width: 600px;
+  background-color: white;
+  margin-top: 100px;
+  margin-left: 260px;
+}
+
+.mt{
+  margin-top: 100px;
+  margin-bottom: 20px;
+}
+
+.H1{
+  margin-left: 100px;
+}
+
+.lb{
+  display: inline-block;
+  margin-left: 50px;
+}
+
+form{
+  margin-top: 20px;
+}
+
+.btr{
+  display: inline-block;
+  margin-left: 200px;
+}
+
+.btr1{
+  display: inline-block;
+  margin-left: 300px;
+}
+
+.cl{
+  display: inline-block;
+  border-radius: 6px;
+}
+
+
+
+.bd{
+  height:auto;
+  background-image: url('../todo-list/images/bk2.jpg');
+}
+
+.nv{
+  margin-top: 20px;
+}
+
+
+
+

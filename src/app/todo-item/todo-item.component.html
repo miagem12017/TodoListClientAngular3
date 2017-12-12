@@ -1,0 +1,93 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  -->
+</head>
+<body class="bd">
+  <div class="itm">
+
+    <div class="currentItem">
+      <label class="currentLabel">
+        {{item.label}}
+      </label>
+      <label class="currentLabelDate">
+        <i class="tiny material-icons" style="color: red;">access_alarm</i> <span style="color: white;">{{item.data['itemDate']| date: 'dd/MM/yyyy'}}</span>
+      </label>
+      <label class="currentLabelButtons">
+        <button (click)="editLabel(true)" class="btn btn-primary glyphicon glyphicon-edit ed "></button>
+        <button (click)="showDeleteModal()" class="btn btn-primary glyphicon glyphicon-trash ed"></button>
+        <button (click)="showDisplayModal()" class="btn btn-primary glyphicon glyphicon-align-justify ed"></button>
+      </label>
+    </div>
+
+    <!--Delete modale popup -->
+    <div [attr.id]="'deleteItem' + listId + item.id" class="w3-modal">
+      <div class="w3-modal-content" style="height: 280px">
+        <div class="divBandeau">
+          <h1 class="deleteModaletitle">Supprimer une tâche</h1>
+          <span (click)="hideDeleteModal()" class="w3-button w3-display-topright">&times;</span>
+        </div>
+          <h1 class="deleteModaleMessage">Êtes-vous sûr de vouloir supprimer cette tâche ?</h1><br>
+          <div class="deleteModaleBtnContener">
+            <button type="button" (click)="hideDeleteModal()" class="btn btn-success btn-block">Annuler</button>
+            <button type="button" button (click)="delete()" class="btn btn-danger btn-block">Supprimer </button>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Display modale popup-->
+  <div [attr.id]="'displayItem' + listId + item.id" class="w3-modal">
+    <div class="w3-modal-content">
+      <div class="modal-container">
+        <div class="displayModalHead">
+          Détails
+        </div>
+        <div style="padding-left: 10px; ">
+          <label class="displayModalLabel">Trite</label>
+          <label class="displayModalContent">{{item.label}}</label><br>
+          <label class="displayModalLabel"><i class="material-icons">event_note</i></label>
+          <label class="displayModalContent">{{item.data['itemDate']| date: 'dd/MM/yyyy'}}</label><br>
+          <label class="displayModalLabel"><i class="material-icons">format_align_justify</i></label>
+          <label class="displayModalContent" style="padding-bottom: 50px">{{item.data['itemDescription']}}</label><br>
+          <div class="modal-footer">
+            <a class=" waves-effect waves-green btn-flat" style="color: darkred;font-weight: initial;" (click)="hideDisplayModal()">Fermer</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modale de modification -->
+  <div [attr.id]="item.id" style="height: 300px" class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
+    <div class="itemEditModal">
+      <h4>Modifier une tâche</h4>
+    </div>
+    <!--Block de boutons -->
+    <div class="EditModalContent">
+      <div class="row" style="padding: 10px">
+        <div class="input-field col s6">
+          <input type="text" #newLabel [ngModel]="item.label" placeholder="Nom de la tâche">
+          <label>Titre</label>
+        </div>
+        <div class="input-field col s6">
+          <input type="date" [ngModel]="item.data['itemDate']" #newDate>
+        </div>
+      </div>
+      <div class="input-field col s6">
+        <input type="text" #newDescription  [ngModel]="item.data['itemDescription']" placeholder="Tapez une description...">
+        <label>Description de la tâche</label>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <a class="waves-effect waves-light btn"(click)="setItem(newLabel.value, newDate.value, newDescription.value);
+                    newLabel.value=''; newDate.value=''; newDescription.value=''">
+        Valider</a>
+      <a class="modal-action modal-close waves-effect waves-green btn-flat" style="color: brown;font-weight: initial;">Annuler</a>
+    </div>
+  </div>
+
+</body>
